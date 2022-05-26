@@ -1,21 +1,36 @@
-/* 
-    给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。
+// 选择排序
+
+// 假设 最小值索引是i 
 
 
-输入: nums = [-1,0,3,5,9,12], target = 2
-输出: -1
-解释: 2 不存在 nums 中因此返回 -1
-*/
+const arr = [108, 99, 12, 34, 5, 6, 67, 89, 0, 2, 3, 5];
 
 
-var search = function (nums, target) {
-    let oMap = new Map();
-    for (let i = 0; i < nums.length; i++) {
-        oMap.set(nums[i], i)
-        if (oMap.has(target)) {  // 利用键名唯一
-            return oMap.get(target)
+function sortSelect(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        let minIndex = i;
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
         }
+        // 交换 i 和最小值
+        [arr[minIndex], arr[i]] = [arr[i], arr[minIndex]]
     }
-    return -1
-};
-console.log(search([1, 2, 3, 4, 5, 6, 723332, 3, 2], 323))
+    return arr
+}
+
+
+
+console.log(sortSelect(arr))
+
+
+
+// [108, 99, 12, 34, 5, 6, 67, 89, 0, 2, 3, 5];
+
+// [0, 99, 12, 34, 5, 6, 67, 89, 108, 2, 3, 5]; 第一次
+
+// [0, 2, 12, 34, 5, 6, 67, 89, 108, 99, 3, 5]; 第二次
+
+// [0, 2, 3, 34, 5, 6, 67, 89, 108, 99, 12, 5]; 第三次
+
