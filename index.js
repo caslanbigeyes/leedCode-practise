@@ -1,36 +1,29 @@
-// 选择排序
-
-// 假设 最小值索引是i 
 
 
-const arr = [108, 99, 12, 34, 5, 6, 67, 89, 0, 2, 3, 5];
+// 给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。
+
+// 输入: s = "abcabcbb"
+// 输出: 3 
+// 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
 
 
-function sortSelect(arr) {
-    for (let i = 0; i < arr.length; i++) {
-        let minIndex = i;
-        for (let j = i + 1; j < arr.length; j++) {
-            if (arr[j] < arr[minIndex]) {
-                minIndex = j;
-            }
+const str = 'abcabcbb'
+
+
+function lookLength(str) {
+    let arr = [];
+    let max = 0;
+    for (let i = 0; i < str.length; i++) {
+        let index = arr.indexOf(str[i]);
+        if (index !== -1) {
+            arr.splice(0, index + 1)
         }
-        // 交换 i 和最小值
-        [arr[minIndex], arr[i]] = [arr[i], arr[minIndex]]
+        arr.push(str[i]);
+        max = Math.max(arr.length, max);
     }
-    return arr
+    return max
 }
+const a = lookLength(str)
+console.log(a)
 
-
-
-console.log(sortSelect(arr))
-
-
-
-// [108, 99, 12, 34, 5, 6, 67, 89, 0, 2, 3, 5];
-
-// [0, 99, 12, 34, 5, 6, 67, 89, 108, 2, 3, 5]; 第一次
-
-// [0, 2, 12, 34, 5, 6, 67, 89, 108, 99, 3, 5]; 第二次
-
-// [0, 2, 3, 34, 5, 6, 67, 89, 108, 99, 12, 5]; 第三次
 
