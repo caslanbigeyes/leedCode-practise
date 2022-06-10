@@ -1,25 +1,24 @@
-import React, { Component } from 'react';
+// 给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。
 
 
-// 动态加载组件
-const asyncComponent = (importComponent) => {
-    return class extends Component {
-        state = {
-            component: null,
+// 输入: s = "abcabcbb"
+// 输出: 3 
+// 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+
+
+function findMaxLen(str) {
+    let arr = [];
+    let max = 0;
+    for (let i = 0; i < str.length; i++) {
+        let index = arr.indexOf(str[i])
+        if (index !== -1) {
+            arr.splice(0, index + 1);
         }
 
-        componentDidMount() {
-            importComponent()
-                .then(cmp => {
-                    this.setState({ component: cmp.default });
-                });
-        }
+        arr.push(str[i]);
+        max = Math.max(arr.length, max);
+    }
+    return max;
+}
 
-        render() {
-            const C = this.state.component;
-            return C ? <C {...this.props} /> : null;
-        }
-    };
-};
-
-export default asyncComponent;
+console.log(findMaxLen('abcabcbb'))
